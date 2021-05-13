@@ -15,18 +15,18 @@ class ViewController: UIViewController {
     @IBOutlet weak var txtUser: UITextField!
     @IBOutlet weak var txtPassword: UITextField!
     @IBAction func btnEnviar(_ sender: Any) {
-        //       TAREA 2
-        // 1 VALIDA  si hay conexión a internet
-        // 2 Implementa las validaciones necesarias para que los cuadreos de texto no estén vacio y el password sea siempre de 10 caracteres
-        // en ambos casos: pressenta los mesajes apropiados para el usuario
+
         
-        if !checkInternetConexion() {
-            return
-        }
+//        if !checkInternetConexion() {
+//            return
+//        }
         
         if !validateTextFields() {
             return
         }
+        
+//        Equipo1
+//        aA&8DcB%WX
         
         let passwordCifrado = cifrar(txtPassword.text!)
         let laUrl = "http://janzelaznog.com/DDAM/iOS/WS/login.php"
@@ -36,13 +36,14 @@ class ViewController: UIViewController {
             print(response)
             
             if case .success(let value) = response.result {
-                self.showAlert(context: self, title: "Error", message: "During request \(value)")
                 if let dict = response.value as? [String: Any] {
                     let codigo = (dict["code"] as? String) ?? ""
                     if codigo == "200" { // logingOK
                         // Suponiendo que el login es correcto
-                        self.performSegue(withIdentifier: "loginOK", sender: self)
+                        self.showAlert(context: self, title: "Success", message: "During request \(value)")
+//                        self.performSegue(withIdentifier: "loginOK", sender: self)
                     }
+                    
                 }
             }
                 
